@@ -1,13 +1,13 @@
 import os
 import numpy as np
-import torch
+#import torch
 import shutil
 import sys
 import csv
 
 sys.path.append('..')
-
-from utils.mutils import makedirs
+sys.path.append('/data/rosa/my_github/e-SNLI/utils/')
+from mutils import makedirs
 
 NLI_DIC_LABELS = {'entailment': 2,  'neutral': 1, 'contradiction': 0}
 
@@ -118,11 +118,10 @@ def get_dev_test_original_expl(data_path, data_type):
 
     return data
     '''
-    data_path = ''
     if data_type == 'dev':
-        data_path = './../dataset/esnli_dev.csv'
+        data_path = data_path + 'esnli_dev.csv'
     else:
-        data_path = './../dataset/esnli_test.csv'
+        data_path = data_path + 'esnli_test.csv'
 
     data = {}
     data['expl_1'] = []
