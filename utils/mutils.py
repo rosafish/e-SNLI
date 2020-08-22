@@ -87,48 +87,48 @@ def permute(x, perm):
     return perm_x
     
 
-# def bleu_prediction(pred_file, data):
-#     candidates = []
-#     references = []
+def bleu_prediction(pred_file, data):
+    candidates = []
+    references = []
 
-#     f = open(pred_file)
-#     pred_reader = csv.DictReader(f)
-#     k = -1
-#     for row in pred_reader:
-#         k += 1
-#         if k < len(data['expl_1']):
-#             prediction = row['pred_expl'].strip().split()
-#             candidates.append(prediction)
-#             current_refs = []
-#             for j in range(1, 3):
-#                 current_refs.append(data['expl_' + str(j)][k].strip().split())
-#             if k % 5000 == 0:
-#                 print 'refs: ', current_refs
-#             references.append(current_refs)
-#             if k == 3:
-#                 print "candidates ", candidates
-#                 print "references ", references, '\n\n\n'
+    f = open(pred_file)
+    pred_reader = csv.DictReader(f)
+    k = -1
+    for row in pred_reader:
+        k += 1
+        if k < len(data['expl_1']):
+            prediction = row['pred_expl'].strip().split()
+            candidates.append(prediction)
+            current_refs = []
+            for j in range(1, 3):
+                current_refs.append(data['expl_' + str(j)][k].strip().split())
+            if k % 5000 == 0:
+                print 'refs: ', current_refs
+            references.append(current_refs)
+            if k == 3:
+                print "candidates ", candidates
+                print "references ", references, '\n\n\n'
     
-#     bleu_score = corpus_bleu(references, candidates)
-#     print 'bleu: ', bleu_score
-#     f.close()
-#     return bleu_score
+    bleu_score = corpus_bleu(references, candidates)
+    print 'bleu: ', bleu_score
+    f.close()
+    return bleu_score
 
 
-# def bleu_inter_annotations_expl3_wrt_12(data):
-#     candidates = []
-#     references = []
+def bleu_inter_annotations_expl3_wrt_12(data):
+    candidates = []
+    references = []
 
-#     for k in range(len(data['expl_1'])):
-#         candidates.append(data['expl_3'][k])
-#         current_refs = []
-#         for j in range(1, 3):
-#             current_refs.append(data['expl_' + str(j)][k])
-#         references.append(current_refs)
+    for k in range(len(data['expl_1'])):
+        candidates.append(data['expl_3'][k])
+        current_refs = []
+        for j in range(1, 3):
+            current_refs.append(data['expl_' + str(j)][k])
+        references.append(current_refs)
     
-#     bleu_score = 100 * corpus_bleu(references, candidates)
-#     print 'bleu: ', bleu_score
-#     return round(bleu_score, 2)
+    bleu_score = 100 * corpus_bleu(references, candidates)
+    print 'bleu: ', bleu_score
+    return round(bleu_score, 2)
 
 
 def remove_file(file):
