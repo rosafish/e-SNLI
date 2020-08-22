@@ -1,4 +1,6 @@
 ._*
 .DS_**
-
+*checkpoint*
+*cache*
 **results**
+*.pyc
