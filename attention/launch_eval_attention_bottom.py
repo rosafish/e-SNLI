@@ -20,11 +20,11 @@ parser = argparse.ArgumentParser(description='eval')
 
 # saved trained models
 parser.add_argument("--directory", type=str, default='')
-parser.add_argument("--state_path", type=str, default='./../pretrained/state_dict_best_devppl__devPPL6.082__epoch_19_model.pt')
-parser.add_argument("--eval_batch_size", type=int, default=32)
+parser.add_argument("--state_path", type=str, default='/data/rosa/models/esnli/code/e-SNLI/pretrained/state_dict_best_devppl__devPPL6.082__epoch_19_model.pt')
+parser.add_argument("--eval_batch_size", type=int, default=16)
 
 parser.add_argument("--directory_expl_to_labels", type=str, default='')
-parser.add_argument("--state_path_expl_to_labels", type=str, default='./../pretrained/state_dict_best_devacc__devACC96.780__epoch_12_model.pt')
+parser.add_argument("--state_path_expl_to_labels", type=str, default='/data/rosa/models/esnli/code/e-SNLI/pretrained/state_dict_best_devacc__devACC96.780__epoch_12_model.pt')
 
 eval_params = parser.parse_args()
 
@@ -40,7 +40,7 @@ from copy_models_attention_bottom_separate import eSNLIAttention
 state_att = torch.load(os.path.join(eval_params.directory, eval_params.state_path))
 model_config_att = state_att['config_model']
 model_state_dict = state_att['model_state']
-att_net = eSNLIAttention(model_config_att).cuda()
+att_net = eSNLIAttention(model_config_att).cuda(1)
 
 # rosa made changes here:
 # because KeyError: 'unexpected key "decoder.init_proj.weight" in state_dict'
@@ -64,16 +64,16 @@ params.eval_batch_size = eval_params.eval_batch_size
 state_expl_to_labels = torch.load(os.path.join(eval_params.directory_expl_to_labels, eval_params.state_path_expl_to_labels))
 model_config_expl_to_label = state_expl_to_labels['config_model']
 model_state_expl_to_label = state_expl_to_labels['model_state']
-expl_net = ExplToLabelsNet(model_config_expl_to_label).cuda()
+expl_net = ExplToLabelsNet(model_config_expl_to_label).cuda(1)
 expl_net.load_state_dict(model_state_expl_to_label)
 
 
 # set gpu device
-torch.cuda.set_device(0)
+torch.cuda.set_device(1)
 
 # criterion
 pad_idx = params.word_index["<p>"]
-criterion_expl = nn.CrossEntropyLoss(ignore_index=pad_idx).cuda()
+criterion_expl = nn.CrossEntropyLoss(ignore_index=pad_idx).cuda(1)
 criterion_expl.size_average = False
 
 eval_all(att_net, expl_net, criterion_expl, params)
