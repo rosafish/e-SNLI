@@ -3,7 +3,8 @@ import numpy as np
 import torch
 import shutil
 import sys
-#sys.path.append("..")
+sys.path.append("..")
+sys.path.append("../utils")
 sys.path.append("/raid/data/oanuru/infer_sent_esnli/utils")
 
 from mutils import makedirs
