@@ -16,8 +16,6 @@ import sys
 
 from utils.mutils import get_sentence_from_indices, get_key_from_val, remove_file, assert_sizes, bleu_prediction
 
-
-#GLOVE_PATH = '../dataset/GloVe/glove.840B.300d.txt'
 GLOVE_PATH = '/data/glove/glove.840B.300d.txt'
 
 
@@ -33,7 +31,7 @@ def evaluate_snli_final(esnli_net, expl_to_labels_net, criterion_expl, dataset, 
 	cum_test_n_words = 0
 
 	headers = ["gold_label", "Premise", "Hypothesis", "pred_label", "pred_expl", "Expl_1", "Expl_2", "Expl_3"]
-	expl_csv = os.path.join(current_run_dir, time.strftime("%d:%m") + "_" + time.strftime("%H:%M:%S") + "_" + dataset + ".csv")
+	expl_csv = os.path.join(current_run_dir, time.strftime("%d:%m") + "_" + time.strftime("%H:%M:%S") + "_" + dataset + "_expl_csv.csv")
 	remove_file(expl_csv)
 	expl_f = open(expl_csv, "a")
 	writer = csv.writer(expl_f)

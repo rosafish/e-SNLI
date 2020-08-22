@@ -4,6 +4,7 @@ import numpy as np
 import shutil
 import sys
 import csv
+import torch
 
 sys.path.append('..')
 sys.path.append('/data/rosa/my_github/e-SNLI/utils/')
