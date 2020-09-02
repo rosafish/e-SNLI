@@ -271,11 +271,10 @@ def eval_all(esnli_net, expl_to_labels_net, criterion_expl, params):
 				[word for word in sent.split() if word in word_vec] +
 				['</s>'] for sent in eval(data_type)[split]])
 
-
 	
 	# SNLI
-	test_acc, test_bleu_score, test_ppl = evaluate_snli_final(esnli_net, expl_to_labels_net, criterion_expl, 'snli_test', snli_test, snli_dev_no_unk, snli_test_no_unk, word_vec, word_index, batch_size, print_every, current_run_dir, visualize=True)
-	#final_dev_acc, dev_bleu_score, final_dev_ppl = evaluate_snli_final(esnli_net, expl_to_labels_net, criterion_expl, 'snli_dev', snli_dev, snli_dev_no_unk, snli_test_no_unk, word_vec, word_index, batch_size, print_every, current_run_dir, visualize=False)
+	#test_acc, test_bleu_score, test_ppl = evaluate_snli_final(esnli_net, expl_to_labels_net, criterion_expl, 'snli_test', snli_test, snli_dev_no_unk, snli_test_no_unk, word_vec, word_index, batch_size, print_every, current_run_dir, visualize=True)
+	final_dev_acc, dev_bleu_score, final_dev_ppl = evaluate_snli_final(esnli_net, expl_to_labels_net, criterion_expl, 'snli_dev', snli_dev, snli_dev_no_unk, snli_test_no_unk, word_vec, word_index, batch_size, print_every, current_run_dir, visualize=False)
 	
 	final_dev_acc, dev_bleu_score, final_dev_ppl = 0, 0, 0
 	headers.append('SNLI-acc')
