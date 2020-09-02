@@ -12,7 +12,7 @@ import torch.nn as nn
 
 from eval_attention import eval_all
 from models_expl_to_labels import ExplToLabelsNet
-from data_attention_bottom import get_train, get_batch, build_vocab, get_word_dict, get_target_expl_batch, get_dev_test_with_expl, get_dev_or_test_without_expl, NLI_DIC_LABELS
+from data_attention_bottom import get_train, get_batch, build_vocab, get_word_dict, get_target_expl_batch, get_dev_test_with_expl, NLI_DIC_LABELS
 
 #import streamtologger
 
